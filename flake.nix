@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Ricky's nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -31,6 +31,19 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "x86_64-darwin";
+
+      # enable TouchID integration
+      security.pam.enableSudoTouchIdAuth = true;
+        system.defaults = {
+          dock.autohide = true;
+          dock.mru-spaces = false;
+          finder.AppleShowAllExtensions = true;
+          finder.FXPreferredViewStyle = "clmv";
+          loginwindow.LoginwindowText = "ricky@coderbunker.ca";
+          screencapture.location = "~/Downloads";
+          screensaver.askForPasswordDelay = 10;
+        };
+
     };
   in
   {
@@ -41,3 +54,5 @@
     };
   };
 }
+
+
