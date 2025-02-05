@@ -29,6 +29,11 @@
             pkgs.nixfmt-rfc-style
             pkgs.neofetch
             pkgs.ansible
+            pkgs.bashInteractive
+            pkgs.git
+            pkgs.jq
+            pkgs.direnv
+            pkgs.sshpass
           ];
 
           # Necessary for using flakes on this system.
@@ -81,6 +86,26 @@
           };
 
           home.file.".vimrc".source = ./vim_configuration;
+          programs.git = {
+              enable = true;
+              userName = "Ricky Ng-Adam";
+              userEmail = "ricky@coderbunker.ca";
+              ignores = [ ".DS_Store" ];
+              extraConfig = {
+                  init.defaultBranch = "main";
+                  push.autoSetupRemote = true;
+              };
+          };
+          programs.bash = {
+              enable = true;
+              shellAliases = {
+                  switch = "darwin-rebuild switch --flake ~/nix-darwin-config";
+              };
+          };
+
+          programs.starship = {
+            enable = true;
+          };
         };
     in
     {
